@@ -1,5 +1,9 @@
-const int trigPin = 5;
-const int echoPin = 4;
+#include <QTRSensors.h>
+QTRSensors qtr;
+const uint8_t SensorCount = 4;
+uint16_t sensorValues[SensorCount];
+const int trigPin = 7;
+const int echoPin = 6;
 const int In1 = 9;
 const int In2 = 8;
 
@@ -12,6 +16,9 @@ void setup() {
   // All motor control pins are outputs
   pinMode(In1, OUTPUT);
   pinMode(In2, OUTPUT);
+
+  qtr.setTypeRC();
+  qtr.setSensorPins((const uint8_t[]){2, 3, 4, 5}, SensorCount);
 
   // initialize serial communication:
   Serial.begin(9600);
@@ -44,6 +51,20 @@ void loop()
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(5);
   digitalWrite(trigPin, LOW);
+
+  qtr.read(sensorValues);
+    for (uint8_t i = 0; i < SensorCount; i++){
+
+      Serial.print(sensorValues[i]);
+
+      Serial.print('\t');
+
+    }
+
+    Serial.println();
+
+    delay(250);
+
 	
   duration = pulseIn(echoPin, HIGH);
 
