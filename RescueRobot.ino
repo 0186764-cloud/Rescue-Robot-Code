@@ -6,6 +6,8 @@ const int trigPin = 7;
 const int echoPin = 6;
 const int In1 = 9;
 const int In2 = 8;
+const int In3 = 10;
+const int In4 = 11;
 
 
 void setup() {
@@ -16,6 +18,8 @@ void setup() {
   // All motor control pins are outputs
   pinMode(In1, OUTPUT);
   pinMode(In2, OUTPUT);
+  pinMode(In3, OUTPUT);
+  pinMode(In4, OUTPUT);
 
   qtr.setTypeRC();
   qtr.setSensorPins((const uint8_t[]){2, 3, 4, 5}, SensorCount);
@@ -28,12 +32,16 @@ void goStraight()   //run both motors in the same direction
   // turn on motor A
   digitalWrite(In1, HIGH);
   digitalWrite(In2, LOW);
+  digitalWrite(In3, HIGH);
+  digitalWrite(In4, LOW);
 
   delay(2000);
 
   // now turn off motors
   digitalWrite(In1, LOW);
   digitalWrite(In2, LOW);  
+  digitalWrite(In3, LOW);
+  digitalWrite(In4, LOW);
 }
 void loop()
 {
