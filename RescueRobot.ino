@@ -144,6 +144,7 @@ digitalWrite(S3,HIGH);
 frequency = pulseIn(sensorOut, LOW);
 
 // Printing the value on the serial monitor
+}
 Serial.print("B= ");//printing name
 Serial.print(frequency);//printing Blue color frequency
 Serial.println("  ");
