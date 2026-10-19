@@ -68,16 +68,16 @@ void goStraight()   //run both motors in the same direction
 
 {
 
-  // turn on motor A
+  // turn on motors
 
   digitalWrite(In1, HIGH);
   digitalWrite(In2, LOW);
-  digitalWrite(In3, HIGH);
-  digitalWrite(In4, LOW);
+  digitalWrite(In3, LOW);
+  digitalWrite(In4, HIGH);
 
 
 
-  delay(2000);
+  delay(1000);
 
   // now turn off motors
 
@@ -85,6 +85,25 @@ void goStraight()   //run both motors in the same direction
   digitalWrite(In2, LOW); 
   digitalWrite(In3, LOW);
   digitalWrite(In4, LOW);   
+
+  delay(1000);
+  // now Turns the robot Left
+
+  digitalWrite(In1, HIGH);
+  digitalWrite(In2, LOW);
+  
+  // now Turns the robot Rigjht
+  delay(1000);
+  digitalWrite(In1, LOW);
+  digitalWrite(In2, LOW); 
+  digitalWrite(In3, LOW);
+  digitalWrite(In4, HIGH);
+
+  // now turn off motors
+
+  delay(1000);
+  digitalWrite(In3, LOW);
+  digitalWrite(In4, LOW); 
 
 }
 
