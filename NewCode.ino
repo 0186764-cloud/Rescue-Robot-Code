@@ -1,15 +1,19 @@
+#include <SPI.h>      //include the SPI bus library
+#include <MFRC522.h>  //include the RFID reader library
+#include <QTRSensors.h>
+
 const int In1 = 9;
 const int In2 = 8;
 const int In3 = 7;
 const int In4 = 6;
 const int trigPin = 3;
 const int echoPin = 2;
+QTRSensors qtr;
+const uint8_t SensorCount = 4;
+uint16_t sensorValues[SensorCount];
 int frequency = 0;
 String test = "LLRRFFBB";
 char moves [64]; //this is the buffer
-
-#include <SPI.h>      //include the SPI bus library
-#include <MFRC522.h>  //include the RFID reader library
 
 #define SS_PIN 10  //Peripheral select pin
 #define RST_PIN 9  //reset pin
@@ -36,6 +40,8 @@ void setup()
   pinMode(In4, OUTPUT);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+	qtr.setTypeRC();
+  qtr.setSensorPins((const uint8_t[]){13, 12, 11, 10}, SensorCount);
 
 }
 
@@ -133,6 +139,20 @@ void SenseColour()
   delay(100);
 
 }
+void LinePlacement(){
+	qtr.read(sensorValues);
+
+  	for (uint8_t i = 0; i < SensorCount; i++){
+
+    	Serial.print(sensorValues[i]);
+
+    	Serial.print('\t');
+  }
+
+  Serial.println();
+
+  delay(250);
+}
 
 void DetectDistance()
 {
@@ -184,6 +204,7 @@ void loop()
       Back();
     }
   }
-  //SenseColour();
+  SenseColour();
   //DetectDistance();
+	//LinePlacement();
 }
